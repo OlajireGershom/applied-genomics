@@ -52,5 +52,7 @@ cd scripts/
 
 nano 01_download_data.sh 02_quality_control.sh 03_build_index.sh 04_alignment.sh 05_feature_counts.sh
 
+#Add .gitkeep to empty folders so that git tracks them
 
+find . -type d -empty -exec touch {}/.gitkeep \;
 
