@@ -1,0 +1,10 @@
+PASS	Basic Statistics	reverse.gz
+PASS	Per base sequence quality	reverse.gz
+PASS	Per sequence quality scores	reverse.gz
+FAIL	Per base sequence content	reverse.gz
+PASS	Per sequence GC content	reverse.gz
+PASS	Per base N content	reverse.gz
+PASS	Sequence Length Distribution	reverse.gz
+FAIL	Sequence Duplication Levels	reverse.gz
+PASS	Overrepresented sequences	reverse.gz
+PASS	Adapter Content	reverse.gz
