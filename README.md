@@ -26,3 +26,38 @@ FluD8 vs FluD4
 Significant upregulated genes: 1
 Significant downregulated genes: 0
 
+
+Summary of DEGs
+≡FluD8 vs Control≡
+out of 29722 with nonzero total read count
+adjusted p-value < 0.05
+LFC > 0 (up)       : 37, 0.12%
+LFC < 0 (down)     : 36, 0.12%
+outliers [1]       : 0, 0%
+low counts [2]     : 11525, 39%
+(mean count < 17)
+[1] see 'cooksCutoff' argument of ?results
+[2] see 'independentFiltering' argument of ?results
+
+≡FluD4 vs Control≡
+out of 29722 with nonzero total read count
+adjusted p-value < 0.05
+LFC > 0 (up)       : 17, 0.057%
+LFC < 0 (down)     : 23, 0.077%
+outliers [1]       : 0, 0%
+low counts [2]     : 14982, 50%
+(mean count < 56)
+[1] see 'cooksCutoff' argument of ?results
+[2] see 'independentFiltering' argument of ?results
+
+
+≡FluD8 vs FluD4≡
+out of 29722 with nonzero total read count
+adjusted p-value < 0.05
+LFC > 0 (up)       : 1, 0.0034%
+LFC < 0 (down)     : 0, 0%
+outliers [1]       : 0, 0%
+low counts [2]     : 0, 0%
+(mean count < 2)
+[1] see 'cooksCutoff' argument of ?results
+[2] see 'independentFiltering' argument of ?results
