@@ -29,35 +29,35 @@ Significant downregulated genes: 0
 
 Summary of DEGs
 ≡FluD8 vs Control≡
-out of 29722 with nonzero total read count
+out of 32391 with nonzero total read count
 adjusted p-value < 0.05
-LFC > 0 (up)       : 37, 0.12%
-LFC < 0 (down)     : 36, 0.12%
-outliers [1]       : 0, 0%
-low counts [2]     : 11525, 39%
-(mean count < 17)
+LFC > 0 (up)       : 1576, 4.9%
+LFC < 0 (down)     : 1913, 5.9%
+outliers [1]       : 7, 0.022%
+low counts [2]     : 11930, 37%
+(mean count < 10)
 [1] see 'cooksCutoff' argument of ?results
 [2] see 'independentFiltering' argument of ?results
 
 ≡FluD4 vs Control≡
-out of 29722 with nonzero total read count
+out of 32391 with nonzero total read count
 adjusted p-value < 0.05
-LFC > 0 (up)       : 17, 0.057%
-LFC < 0 (down)     : 23, 0.077%
-outliers [1]       : 0, 0%
-low counts [2]     : 14982, 50%
-(mean count < 56)
+LFC > 0 (up)       : 84, 0.26%
+LFC < 0 (down)     : 103, 0.32%
+outliers [1]       : 7, 0.022%
+low counts [2]     : 13186, 41%
+(mean count < 14)
 [1] see 'cooksCutoff' argument of ?results
 [2] see 'independentFiltering' argument of ?results
 
 
 ≡FluD8 vs FluD4≡
-out of 29722 with nonzero total read count
+out of 32391 with nonzero total read count
 adjusted p-value < 0.05
-LFC > 0 (up)       : 1, 0.0034%
-LFC < 0 (down)     : 0, 0%
-outliers [1]       : 0, 0%
-low counts [2]     : 0, 0%
-(mean count < 2)
+LFC > 0 (up)       : 673, 2.1%
+LFC < 0 (down)     : 746, 2.3%
+outliers [1]       : 7, 0.022%
+low counts [2]     : 13186, 41%
+(mean count < 14)
 [1] see 'cooksCutoff' argument of ?results
 [2] see 'independentFiltering' argument of ?results
