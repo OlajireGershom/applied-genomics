@@ -123,6 +123,8 @@ cat("Total unique significant genes across comparisons:", length(all_sig_genes),
 #Subset VST matrix to significant genes
 heat_map <- vst_mat[all_sig_genes, ]
 
+
+
 # Z-score scale each row so colours reflect relative expression
 heat_scaled <- t(scale(t(heat_map)))
 jpeg("Results/Figures/Heatmap_sig_DEGs.jpg", width = 480, height = 480, units = "px")
