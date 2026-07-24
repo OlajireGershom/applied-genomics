@@ -19,7 +19,7 @@ files <- list.files(path = "counts/",
                     )
 print(files)
 
-#Read eac count file
+#Read each count file
 count_list <- lapply (files, function(f) {
   read.delim(f, header = TRUE)
 })
@@ -30,7 +30,7 @@ count_matrix <- Reduce(function(x,y) merge(x, y, by = "Geneid", all = TRUE),
 
 #set gene IDs as row names
 rownames(count_matrix) <- count_matrix$Geneid
-count_matrix$Geneid <- NULL #remove te redundant Geneid column
+count_matrix$Geneid <- NULL #remove the redundant Geneid column
 
 #Convert to integer matrix (required by DeSEq2)
 count_matrix <- as.matrix(count_matrix)
