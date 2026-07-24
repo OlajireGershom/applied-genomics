@@ -61,3 +61,8 @@ low counts [2]     : 13186, 41%
 (mean count < 14)
 [1] see 'cooksCutoff' argument of ?results
 [2] see 'independentFiltering' argument of ?results
+
+
+FluD4vsControl significant DEGs: 17 (up: 16 |down: 1 )
+FluD8vsControl significant DEGs: 216 (up: 129 |down: 87 )
+FluD8vsFluD4 significant DEGs: 73 (up: 45 |down: 28 )
