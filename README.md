@@ -23,6 +23,9 @@ SRR5364330:- 98.64% overall alignment rate
 SRR5364359:- 98.66% overall alignment rate
 SRR5364327:- 98.44% overall alignment rate
 SRR5364331:- 98.28% overall alignment rate
+
+
+
 Assignment 5
 Total number of genes tested [after filtering]: 29722
 FluD8 vs Control
