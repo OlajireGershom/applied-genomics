@@ -12,6 +12,17 @@ Number of samples: 45 samples
 Sequencing type: Expression profiling by high throughput sequencing
 Organism: Mus musculus
 
+
+Assignment 3
+SRR5364316:- 98.67% overall alignment rate
+SRR5364317:- 98.78% overall alignment rate
+SRR5364318:- 98.75% overall alignment rate
+SRR5364321:- 98.64% overall alignment rate
+SRR5364323:- 98.47% overall alignment rate
+SRR5364330:- 98.64% overall alignment rate
+SRR5364359:- 98.66% overall alignment rate
+SRR5364327:- 98.44% overall alignment rate
+SRR5364331:- 98.28% overall alignment rate
 Assignment 5
 Total number of genes tested [after filtering]: 29722
 FluD8 vs Control
