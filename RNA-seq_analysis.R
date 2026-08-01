@@ -7,11 +7,16 @@ BiocManager::install("EnhancedVolcano")
 
 BiocManager::install("clusterProfiler")
 
+BiocManager::install("GO.db")
+BiocManager::install("GO.db")
+
 BiocManager::install("org.Mm.eg.db")
 
+library(clusterProfiler)
 library(DESeq2)
 library(ashr)
 library(tidyverse)
+library(GO.db)
 
 files <- list.files(path = "counts/",
                     pattern = "\\.tabular$",
@@ -134,3 +139,160 @@ shrink_and_export(dds, c("Condition", "FluD8", "FluD4"), "FluD8vsFluD4")
 
 saveRDS(dds, "C:/Users/GERSHOM/Desktop/data/rnaseq/applied-genomics/data/dds_object.rds")
 cat("Analysis complete! \n")
+
+
+
+
+# GENE ONTOLOGY -----------------------------------------------------------
+library(biomaRt)
+mouse_mart <- useMart(biomart = "ensembl",
+                      host = "ensembl.org",
+                      dataset = "mmusculus_gene_ensembl")
+
+#Read TSV file for differentially expressed genes in FluD4vsControl file...
+DEGs_FluD4 <- read.delim("./Results/dataFluD4vsControlSig_DEGs.tsv", header = TRUE, stringsAsFactors = FALSE)
+
+# Extract ensembl IDs from its column in the FluD4vsControl sig. DEGs file
+ensembl_ids4 <- DEGs_FluD4$gene_id 
+
+#Read TSV file for differentially expressed genes in FluD8vsControl file...
+DEGs_FluD8 <- read.delim("./Results/dataFluD8vsControlSig_DEGs.tsv", header = TRUE, stringsAsFactors = FALSE)
+
+# Extract ensembl IDs from its column in the FluD8vsControl sig. DEGs file
+ensembl_ids8 <- DEGs_FluD8$gene_id
+
+#Read TSV file for differentially expressed genes in FluD4vsFluD8 file...
+DEGs_FluD48 <- read.delim("./Results/dataFluD8vsFluD4Sig_DEGs.tsv", header = TRUE, stringsAsFactors = FALSE)
+
+# Extract ensembl IDs from its column in the file
+ensembl_ids48 <- DEGs_FluD48$gene_id 
+
+
+
+#Ensemble query to get mouse gene official name for FluD4vsControl sig. DEGs file
+result_FluD4 <- getBM(
+  mart = mouse_mart,
+  attributes = c("ensembl_gene_id", "mgi_symbol"),
+  filters = "ensembl_gene_id",
+  values = ensembl_ids4
+)
+
+
+#Ensemble query to get mouse gene official name for FluD8vsControl sig. DEGs file
+result_FluD8 <- getBM(
+  mart = mouse_mart,
+  attributes = c("ensembl_gene_id", "mgi_symbol"),
+  filters = "ensembl_gene_id",
+  values = ensembl_ids8
+)
+
+
+
+#Ensemble query to get mouse gene official name for FluD4vsFluD8 sig. DEGs file
+result_FluD48 <- getBM(
+  mart = mouse_mart,
+  attributes = c("ensembl_gene_id", "mgi_symbol"),
+  filters = "ensembl_gene_id",
+  values = ensembl_ids48
+)
+
+
+write_tsv(result_FluD8, file = "annotated_FluD8.tsv")
+write_tsv(result_FluD4, file = "annotated_FluD4.tsv")
+write_tsv(result_FluD48, file = "annotated_FluD48.tsv")
+
+# GENE ONTOLOGY -----------------------------------------------------------
+mouse_mart <- useMart(biomart = "ensembl",
+                      host = "ensembl.org",
+                      dataset = "mmusculus_gene_ensembl")
+#Convert gene names to entrez ids for FluD4vs control 
+annot_entrez4 <- getBM(values = result_FluD4$mgi_symbol,
+                      mart = mouse_mart,
+                      attributes = c("mgi_symbol",
+                                     "entrezgene_id",
+                                     "description"),
+                      filters = "mgi_symbol")
+
+#Convert gene names to entrez ids for FluD8 vs control 
+annot_entrez8 <- getBM(values = result_FluD8$mgi_symbol,
+                       mart = mouse_mart,
+                       attributes = c("mgi_symbol",
+                                      "entrezgene_id",
+                                      "description"),
+                       filters = "mgi_symbol")
+
+#Convert gene names to entrez ids for FluD48 vs control 
+annot_entrez48 <- getBM(values = result_FluD48$mgi_symbol,
+                       mart = mouse_mart,
+                       attributes = c("mgi_symbol",
+                                      "entrezgene_id",
+                                      "description"),
+                       filters = "mgi_symbol")
+
+#Convert entrez ids in the files to be character values instead of numerical values
+annot_entrez4$entrezgene_id <- as.character(annot_entrez4$entrezgene_id)
+annot_entrez8$entrezgene_id <- as.character(annot_entrez8$entrezgene_id)
+annot_entrez48$entrezgene_id <- as.character(annot_entrez48$entrezgene_id)
+
+library(clusterProfiler)
+library(org.Mm.eg.db)
+#Biological process analysis for the different analysis: FluD4; FluD8 & FluD48
+BP_FluD4 <- enrichGO(gene = annot_entrez4$entrezgene_id,
+                     OrgDb = org.Mm.eg.db,
+                     ont = "BP", #ontology is Biological Processing (BP)
+                     pAdjustMethod = "BH", #Benjamin H...method
+                     qvalueCutoff = 0.05,
+                     readable = FALSE,
+                     pool = FALSE)
+BP_FluD4_table <- as.data.frame(BP_FluD4)
+view(BP_FluD4_table)
+
+BP_FluD4_final <- clusterProfiler::simplify(BP_FluD4)
+ #save file locally...
+write_delim(
+  x = as.data.frame(BP_FluD4@result),
+  file = "FluD4_Biological process.csv",
+  delim = ","
+)
+
+
+
+#FluD8 vs control
+BP_FluD8 <- enrichGO(gene = annot_entrez8$entrezgene_id,
+                     OrgDb = org.Mm.eg.db,
+                     ont = "BP", #ontology is Biological Processing (BP)
+                     pAdjustMethod = "BH", #Benjamin H...method
+                     qvalueCutoff = 0.05,
+                     readable = FALSE,
+                     pool = FALSE)
+BP_FluD8_table <- as.data.frame(BP_FluD8)
+view(BP_FluD8_table)
+
+BP_FluD8_final <- clusterProfiler::simplify(BP_FluD8)
+#save file locally...
+write_delim(
+  x = as.data.frame(BP_FluD8@result),
+  file = "FluD8_Biological process.csv",
+  delim = ","
+)
+
+
+#FluD4 vs FluD8
+BP_FluD48 <- enrichGO(gene = annot_entrez48$entrezgene_id,
+                     OrgDb = org.Mm.eg.db,
+                     ont = "BP", #ontology is Biological Processing (BP)
+                     pAdjustMethod = "BH", #Benjamin H...method
+                     qvalueCutoff = 0.05,
+                     readable = FALSE,
+                     pool = FALSE)
+BP_FluD48_table <- as.data.frame(BP_FluD48)
+view(BP_FluD48)
+
+BP_FluD48_final <- clusterProfiler::simplify(BP_FluD48)
+#save file locally...
+write_delim(
+  x = as.data.frame(BP_FluD4@result),
+  file = "FluD48_Biological_process.csv",
+  delim = ","
+)
+#This particular one yielded zero esults from the enrichGO() function
