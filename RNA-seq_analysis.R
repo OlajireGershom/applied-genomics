@@ -291,8 +291,309 @@ view(BP_FluD48)
 BP_FluD48_final <- clusterProfiler::simplify(BP_FluD48)
 #save file locally...
 write_delim(
-  x = as.data.frame(BP_FluD4@result),
+  x = as.data.frame(BP_FluD48@result),
   file = "FluD48_Biological_process.csv",
   delim = ","
 )
 #This particular one yielded zero esults from the enrichGO() function
+
+
+#dotplot
+library(enrichplot)
+#FluD4
+png("BP_FluD4.png", width = 460, height = 550)
+dotplot(BP_FluD4_final, showCategory = 10)
+dev.off()
+
+#FluD8
+png("BP_FluD8.png", width = 460, height = 550)
+dotplot(BP_FluD8_final, showCategory = 10)
+dev.off()
+
+#FluD48
+png("BP_FluD48.png", width = 460, height = 550)
+dotplot(BP_FluD48_final, showCategory = 10)
+dev.off()
+
+
+#Bar plot
+#FluD4
+png("BP_FluD4_barplot.png", width = 460, height = 550)
+barplot(BP_FluD4_final, showCategory = 10)
+dev.off()
+
+#FluD8
+png("BP_FluD8_barplot.png", width = 460, height = 550)
+barplot(BP_FluD8_final, showCategory = 10)
+dev.off()
+
+
+
+# Cellular Component ------------------------------------------------------
+CC_FluD4 <- enrichGO(gene = annot_entrez4$entrezgene_id,
+                     OrgDb = org.Mm.eg.db,
+                     keyType = "ENTREZID",
+                     ont = "CC", #ontology is Cellular Component(CC)
+                     pAdjustMethod = "BH", #Benjamin H...method
+                     qvalueCutoff = 0.05,
+                     readable = FALSE,
+                     pool = FALSE)
+CC_FluD4_table <- as.data.frame(CC_FluD4)
+view(CC_FluD4_table)
+
+CC_FluD4_final <- clusterProfiler::simplify(CC_FluD4)
+#save file locally...
+write_delim(
+  x = as.data.frame(CC_FluD4@result),
+  file = "FluD4_CellularComponent.csv",
+  delim = ","
+)
+
+
+
+#FluD8 vs control
+CC_FluD8 <- enrichGO(gene = annot_entrez8$entrezgene_id,
+                     OrgDb = org.Mm.eg.db,
+                     keyType = "ENTREZID",
+                     ont = "CC", #ontology is Cellular Component(CC)
+                     pAdjustMethod = "BH", #Benjamin H...method
+                     qvalueCutoff = 0.05,
+                     readable = FALSE,
+                     pool = FALSE)
+CC_FluD8_table <- as.data.frame(CC_FluD8)
+view(CC_FluD8_table)
+
+CC_FluD8_final <- clusterProfiler::simplify(CC_FluD8)
+#save file locally...
+write_delim(
+  x = as.data.frame(CC_FluD8@result),
+  file = "FluD8_CellularComponent.csv",
+  delim = ","
+)
+
+
+#FluD4 vs FluD8
+CC_FluD48 <- enrichGO(gene = annot_entrez48$entrezgene_id,
+                      OrgDb = org.Mm.eg.db,
+                      keyType = "ENTREZID",
+                      ont = "CC", #ontology is Cellular component
+                      pAdjustMethod = "BH", #Benjamin H...method
+                      qvalueCutoff = 0.05,
+                      readable = FALSE,
+                      pool = FALSE)
+CC_FluD48_table <- as.data.frame(CC_FluD48)
+view(CC_FluD48)
+
+CC_FluD48_final <- clusterProfiler::simplify(CC_FluD48)
+#save file locally...
+write_delim(
+  x = as.data.frame(CC_FluD48@result),
+  file = "FluD48_CellularComponent.csv",
+  delim = ","
+)
+
+#dotplot
+library(enrichplot)
+#FluD4
+png("CC_FluD4.png", width = 460, height = 550)
+dotplot(CC_FluD4_final, showCategory = 10)
+dev.off()
+
+#FluD8
+png("CC_FluD8.png", width = 460, height = 550)
+dotplot(CC_FluD8_final, showCategory = 10)
+dev.off()
+
+#FluD48
+png("CC_FluD48.png", width = 460, height = 550)
+dotplot(CC_FluD48_final, showCategory = 10)
+dev.off()
+
+
+#Bar plot
+#FluD4
+png("CC_FluD4_barplot.png", width = 460, height = 550)
+barplot(CC_FluD4_final, showCategory = 10)
+dev.off()
+
+#FluD8
+png("CC_FluD8_barplot.png", width = 460, height = 550)
+barplot(CC_FluD8_final, showCategory = 10)
+dev.off()
+
+#FluD48
+png("CC_FluD48_barplot.png", width = 460, height = 550)
+barplot(CC_FluD48_final, showCategory = 10)
+dev.off()
+
+
+
+# Molecular Function ------------------------------------------------------
+MF_FluD4 <- enrichGO(gene = annot_entrez4$entrezgene_id,
+                     OrgDb = org.Mm.eg.db,
+                     keyType = "ENTREZID",
+                     ont = "MF", #ontology is Molecular Function(MF)
+                     pAdjustMethod = "BH", #Benjamin H...method
+                     qvalueCutoff = 0.05,
+                     readable = FALSE,
+                     pool = FALSE)
+MF_FluD4_table <- as.data.frame(MF_FluD4)
+view(MF_FluD4_table)
+
+MF_FluD4_final <- clusterProfiler::simplify(MF_FluD4)
+#save file locally...
+write_delim(
+  x = as.data.frame(MF_FluD4@result),
+  file = "FluD4_MolecularFunction.csv",
+  delim = ","
+)
+
+
+
+#FluD8 vs control
+MF_FluD8 <- enrichGO(gene = annot_entrez8$entrezgene_id,
+                     OrgDb = org.Mm.eg.db,
+                     keyType = "ENTREZID",
+                     ont = "MF", #ontology is Molecular Function(MF)
+                     pAdjustMethod = "BH", #Benjamin H...method
+                     qvalueCutoff = 0.05,
+                     readable = FALSE,
+                     pool = FALSE)
+MF_FluD8_table <- as.data.frame(MF_FluD8)
+view(MF_FluD8_table)
+
+MF_FluD8_final <- clusterProfiler::simplify(MF_FluD8)
+#save file locally...
+write_delim(
+  x = as.data.frame(MF_FluD8@result),
+  file = "FluD8_MolecularFunction.csv",
+  delim = ","
+)
+
+
+#FluD4 vs FluD8
+MF_FluD48 <- enrichGO(gene = annot_entrez48$entrezgene_id,
+                      OrgDb = org.Mm.eg.db,
+                      keyType = "ENTREZID",
+                      ont = "MF", #ontology is Molecular Function
+                      pAdjustMethod = "BH", #Benjamin H...method
+                      qvalueCutoff = 0.05,
+                      readable = FALSE,
+                      pool = FALSE)
+MF_FluD48_table <- as.data.frame(MF_FluD48)
+view(MF_FluD48)
+#No data on Molecular Function betweeen FluD4 and FluD8
+
+MF_FluD48_final <- clusterProfiler::simplify(MF_FluD48)
+#save file locally...
+write_delim(
+  x = as.data.frame(CC_FluD48@result),
+  file = "FluD48_MolecularFunction.csv",
+  delim = ","
+)
+
+#dotplot
+library(enrichplot)
+#FluD4
+png("MF_FluD4.png", width = 460, height = 550)
+dotplot(MF_FluD4_final, showCategory = 10)
+dev.off()
+
+#FluD8
+png("MF_FluD8.png", width = 460, height = 550)
+dotplot(MF_FluD8_final, showCategory = 10)
+dev.off()
+
+#FluD48
+png("MF_FluD48.png", width = 460, height = 550)
+dotplot(MF_FluD48_final, showCategory = 10)
+dev.off()
+
+
+#Bar plot
+#FluD4
+png("MF_FluD4_barplot.png", width = 460, height = 550)
+barplot(MF_FluD4_final, showCategory = 10)
+dev.off()
+
+#FluD8
+png("MF_FluD8_barplot.png", width = 460, height = 550)
+barplot(MF_FluD8_final, showCategory = 10)
+dev.off()
+
+#FluD48
+png("MF_FluD48_barplot.png", width = 460, height = 550)
+barplot(MF_FluD48_final, showCategory = 10)
+dev.off()
+
+
+
+
+# KEGG Analysis -----------------------------------------------------------
+#FluD4 vs Control
+KEGG_FluD4 <- enrichKEGG(gene = annot_entrez4$entrezgene_id,
+                         organism = "mmu",
+                         pAdjustMethod = "BH", #Benjamin H...method
+                         qvalueCutoff = 0.05)
+KEGG_FluD4_table <- as.data.frame(KEGG_FluD4)
+view(KEGG_FluD4_table)
+write.csv(KEGG_FluD4_table, file = "KEGGpathway_FluD4.csv")
+
+
+#FluD8 vs control
+KEGG_FluD8 <- enrichKEGG(gene = annot_entrez8$entrezgene_id,
+                         organism = "mmu",
+                         pAdjustMethod = "BH", #Benjamin H...method
+                         qvalueCutoff = 0.05)
+KEGG_FluD8_table <- as.data.frame(KEGG_FluD8)
+view(KEGG_FluD8_table)
+write.csv(KEGG_FluD8_table, file = "KEGGpathway_FluD8.csv")
+
+
+
+#FluD4 vs FluD8
+KEGG_FluD48 <- enrichKEGG(gene = annot_entrez48$entrezgene_id,
+                         organism = "mmu",
+                         pAdjustMethod = "BH", #Benjamin H...method
+                         qvalueCutoff = 0.05)
+KEGG_FluD48_table <- as.data.frame(KEGG_FluD48)
+view(KEGG_FluD48_table)
+#Yielded no results too!
+write.csv(KEGG_FluD48_table, file = "KEGGpathway_FluD48.csv")
+
+
+
+#dotplot
+#library(enrichplot)
+#FluD4
+png("KEGG_FluD4.png", width = 460, height = 550)
+dotplot(KEGG_FluD4, showCategory = 10)
+dev.off()
+
+#FluD8
+png("KEGG_FluD8.png", width = 460, height = 550)
+dotplot(KEGG_FluD8, showCategory = 10)
+dev.off()
+
+#FluD48
+png("KEGG_FluD48.png", width = 460, height = 550)
+dotplot(KEGG_FluD48, showCategory = 10)
+dev.off()
+
+
+#Bar plot
+#FluD4
+png("KEGG_FluD4_barplot.png", width = 460, height = 550)
+barplot(KEGG_FluD4, showCategory = 10)
+dev.off()
+
+#FluD8
+png("KEGG_FluD8_barplot.png", width = 460, height = 550)
+barplot(KEGG_FluD8, showCategory = 10)
+dev.off()
+
+#FluD48
+png("KEGG_FluD48_barplot.png", width = 460, height = 550)
+barplot(KEGG_FluD48, showCategory = 10)
+dev.off()
+
